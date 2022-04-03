@@ -1,7 +1,9 @@
-const Todo = require('./Todo');
+const Product = require('./Product');
 const User = require('./User');
+const Cart = require('./Cart');
 
 module.exports = {
-	Todo,
+	Cart,
+	Product,
 	User,
 };

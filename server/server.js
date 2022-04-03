@@ -1,34 +1,14 @@
 const express = require('express');
 const {ApolloServer} = require('apollo-server-express');
 const jwt = require('jsonwebtoken');
-const utils = require('./utils');
+const { authMiddleware } = require('./utils');
 const {resolvers, typeDefs,} = require('./schemas');
 const db = require('./config/connection');
 
 const server = new ApolloServer({
 	resolvers,
 	typeDefs,
-	context: ({req, res}) => {
-		const token = req.headers.authorization;
-
-		// if no token no user is logged in
-		if (token.length === 0) {
-			return req;
-		}
-
-		try {
-			const {data} = jwt.verify(token, utils.secret);
-			req.user = data;
-		} catch (e) {
-			return {error: 'Invalid token'};
-		}
-
-		return {
-			req,
-			coolestGuyInTheWorld: 'Manny',
-			someNerd: 'Matthew',
-		};
-	},
+	context: authMiddleware
 });
 
 const PORT = process.env.PORT || 3001;
@@ -42,7 +22,6 @@ db.once('open', async () => {
 	// creates a /graphql endpoint for our server
 	server.applyMiddleware({ app });
 	app.listen(PORT, () => console.log('Server running on PORT 3001'));
-
 });
 
 
