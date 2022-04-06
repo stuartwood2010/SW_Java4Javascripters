@@ -35,16 +35,16 @@ const resolvers = {
 			return {token, user};
 		},
 		login: async (_root, {email, password}) => {
-			const userFound = await User.findOne({email});
+			const user = await User.findOne({email});
 
-			if (!userFound) {
+			if (!user) {
 				throw new AuthorizationError('No user found with these credentials');
 			}
 
 			// successfully logged in
-			if (userFound.password === password) {
-				const token = utils.signToken(userFound.username, userFound._id);
-				return {token, userFound};
+			if (user.password === password) {
+				const token = utils.signToken(user.username, user._id);
+				return {token, user};
 			}
 
 			throw new AuthorizationError('No user found with these credentials');
