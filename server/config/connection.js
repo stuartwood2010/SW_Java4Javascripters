@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost:27017/j4jdb', {
+mongoose.connect('mongodb://localhost:27017/J4JDB', {
 	useNewUrlParser: true,
 	useUnifiedTopology: true,
 });
