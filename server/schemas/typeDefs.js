@@ -8,9 +8,24 @@ const typeDefs = gql`
         firstName: String
         lastName: String
         fullName: String
-        nameLength: Int
+        username: String
         email: String
-        todos: [Todo]
+        cart: [Cart]
+    }
+
+    type Product {
+        _id: ID
+        name: String
+        price: Int
+        image: String
+        quantity: Int
+        inStock: Boolean
+    }
+
+    type Cart {
+        userId: User
+        products: [Product]
+        amount: Int
     }
 
     type Auth {
@@ -18,25 +33,19 @@ const typeDefs = gql`
         user: User
     }
 
-    type Todo {
-        _id: ID
-        task: String
-        completed: Boolean
-        userId: String
-        user: User
-    }
-
     type Query {
         user(id: String!): User
         users: [User]
-        todo(id: String!): Todo
-        todos: [Todo]
+        product(id: String!): Product
+        products: [Product]
+        cart(id: String!): Cart
     }
 
     type Mutation {
-        createUser(firstName: String!, lastName: String!, email: String!, password: String!): Auth
+        createUser(firstName: String!, lastName: String!, username: String!, email: String!, password: String!): Auth
         login(email: String!, password: String!): Auth
-        createTodo(task: String!, userId: String!, completed: Boolean): Todo
+        addProductToCart(id: String!): Auth
+        removeProductFromCart(id: String!): Cart
     }
 `;
 

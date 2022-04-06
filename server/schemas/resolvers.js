@@ -1,5 +1,6 @@
 const {AuthorizationError} = require('apollo-server-express');
-const {Todo, User} = require('../models');
+const { argsToArgsConfig } = require('graphql/type/definition');
+const {Cart, Product, User} = require('../models');
 const utils = require('../utils');
 
 const resolvers = {
@@ -11,55 +12,63 @@ const resolvers = {
 			if (!context.req.user) {
 				throw new AuthorizationError('You must be logged in to do that');
 			}
-			console.log(context.coolestGuyInTheWorld);
-			console.log(context.someNerd);
 			return await User.find({});
 		},
-		todo: async (_root, {id}) => {
-			return await Todo.findById(id);
+		product: async (_root, {id}) => {
+			return await Product.findById(id);
 		},
-		todos: async () => {
-			return await Todo.find({});
+		products: async () => {
+			return await Product.find({});
 		}
 	},
 	Mutation: {
 		// Sign up
-		createUser: async (_root, {firstName, lastName, email, password}) => {
-			console.log('im hit!!!');
+		createUser: async (_root, {firstName, lastName, username, email, password}) => {
 			const user = await User.create({
 				firstName,
 				lastName,
+				username,
 				email,
 				password,
 			});
-
-			const token = utils.signToken(user.firstName, user._id);
-			console.log(token);
+			const token = utils.signToken(user.username, user._id);
 			return {token, user};
 		},
 		login: async (_root, {email, password}) => {
 			const userFound = await User.findOne({email});
 
 			if (!userFound) {
-				throw new AuthorizationError('No user found with this email');
+				throw new AuthorizationError('No user found with these credentials');
 			}
 
 			// successfully logged in
 			if (userFound.password === password) {
-				const token = utils.signToken(userFound.firstName, userFound._id);
-				console.log(userFound);
+				const token = utils.signToken(userFound.username, userFound._id);
 				return {token, userFound};
 			}
 
-			throw new AuthorizationError('You must provide correct credentials');
+			throw new AuthorizationError('No user found with these credentials');
 
 		},
-		createTodo: async (_root, {task, userId, completed}) => {
-			return await Todo.create({
-				task,
-				userId,
-				completed
-			});
+		addProductToCart: async (parent, {input}, context) => {
+			if (context.user) {
+				const cartHolder = await User.findByIdAndUpdate(
+					{_id: context.user._id},
+					{$addToSet: {cart: input}},
+					{new: true}
+				)
+				return cartHolder
+			}
+		},
+		removeProductFromCart: async (parent, {input}, context) => {
+			if  (context.user) {
+				const cartHolder = await User.findByIdAndUpdate(
+					{_id: context.user._id},
+					{$pull: {savedBooks: {bookId: argsToArgsConfig.bookId}}},
+					{new: true}
+				);
+				return cartHolder;
+			}
 		}
 	},
 	// Field Resolvers
@@ -71,19 +80,20 @@ const resolvers = {
 			console.log('I AM ROOT',root);
 			return `${root.firstName} ${root.lastName}`;
 		},
-		nameLength: (root) => {
-			return root.firstName.length;
-		},
-		todos: async  (root) => {
-			return await Todo.find({
+		cart: async  (root) => {
+			return await Cart.find({
 				userId: root._id,
 			});
 		}
 	},
-	Todo: {
-		user: async (root) => {
-			console.log('root', root, 54);
+	Cart: {
+		userId: async (root) => {
 			return await User.findById(root.userId);
+		},
+		products: async (root) => {
+			return await Product.find({
+				cartId: root._id
+			})
 		}
 	}
 };
