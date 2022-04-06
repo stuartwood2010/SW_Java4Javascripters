@@ -10,13 +10,13 @@ const typeDefs = gql`
         fullName: String
         username: String
         email: String
-        cart: [Cart]
+        cart: Cart
     }
 
     type Product {
         _id: ID
         name: String
-        price: Int
+        price: Float
         image: String
         quantity: Int
         inStock: Boolean

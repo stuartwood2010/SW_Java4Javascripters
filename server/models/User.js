@@ -38,10 +38,12 @@ const userSchema = new Schema({
 		required: true,
 		trim: true,
 	},
-	cart: {
+	cart: [
+		{
 		type: Schema.Types.ObjectId,
 		ref: 'Cart',
 	}
+	]
 });
 
 module.exports = model('User', userSchema);
