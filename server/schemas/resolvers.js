@@ -11,9 +11,9 @@ const resolvers = {
 			return await User.findById(id);
 		},
 		users: async (_root, _args, context) => {
-			if (!context.req.user) {
-				throw new AuthorizationError('You must be logged in to do that');
-			}
+			// if (!context.req.user) {
+			// 	throw new AuthorizationError('You must be logged in to do that');
+			// }
 			return await User.find({});
 		},
 		product: async (_root, {
@@ -36,10 +36,15 @@ const resolvers = {
 			throw new AuthorizationError('Not logged in');
 		},
 		checkout: async (parent, args, context) => {
-			const url = new URL(context.headers.referer).origin;
-			const order = new Order({
+			// const url = new URL(context.headers.referer).origin;
+			const order = await Order.create({
 				products: args.products
 			});
+			await User.findByIdAndUpdate(
+				{ _id: context.user._id },
+				{ $push: { orders: order} },
+				{ new: true }
+			  );
 			const line_items = [];
 
 			const {
@@ -50,7 +55,7 @@ const resolvers = {
 				const product = await stripe.products.create({
 					name: products[i].name,
 					description: products[i].description,
-					images: [`${url}/images/${products[i].image}`]
+					// images: [`${url}/images/${products[i].image}`]
 				});
 
 				const price = await stripe.prices.create({
@@ -68,8 +73,8 @@ const resolvers = {
 				payment_method_types: ['card'],
 				line_items,
 				mode: 'payment',
-				success_url: `${url}/success?session_id={CHECKOUT_SESSION_ID}`,
-				cancel_url: `${url}/`
+				success_url: `https://www.google.com`,
+				cancel_url: `https://www.google.com`
 			});
 			return {
 				session: session.id
