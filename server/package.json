@@ -8,7 +8,6 @@
     "dev": "nodemon server.js",
     "start": "node server.js",
     "seed": "node config/seeds.js"
-   
   },
   "keywords": [],
   "author": "",
@@ -20,6 +19,7 @@
     "graphql": "^16.3.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.2.9",
+    "stripe": "^8.215.0",
     "validator": "^13.7.0"
   }
 }

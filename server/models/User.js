@@ -38,10 +38,10 @@ const userSchema = new Schema({
 		required: true,
 		trim: true,
 	},
-	cart: [
+	orders: [
 		{
 		type: Schema.Types.ObjectId,
-		ref: 'Cart',
+		ref: 'Order',
 	}
 	]
 });
