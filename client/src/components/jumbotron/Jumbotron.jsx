@@ -1,13 +1,12 @@
 import React from "react";
-import  "./jumbotron.scss";
+import './jumbotron.scss' ;
 
 function Jumbotron({ children }) {
   return (
-    <div
-    style={{height: 560, clear: "both", paddingTop: 120, textAlign: "center" }}
-    >
-      {children}
-    </div>
+        <div className="jumbotron"> 
+            <h1>Hello World</h1>
+            {children}
+        </div>
   );
 }
 
