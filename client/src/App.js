@@ -2,9 +2,7 @@
 import { Routes, Route } from 'react-router-dom';
 import { Cart } from './pages/Cart';
 import { Homepage } from './pages/Homepage';
-import { Login } from './pages/Login';
 import { Menu } from './pages/Menu';
-import { SignUp } from './pages/Signup';
 import { Store } from './pages/Store';
 import Navbar from './components/Navbar';
 

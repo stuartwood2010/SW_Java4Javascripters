@@ -42,7 +42,6 @@ export const CREATE_USER = gql`
             }
         }   
     }
-}
 `;
 
 export const UPDATE_USER = gql`
