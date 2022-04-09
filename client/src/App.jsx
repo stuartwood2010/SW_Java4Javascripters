@@ -1,16 +1,16 @@
 // import { useQuery } from '@apollo/client';
 import { Routes, Route } from 'react-router-dom';
-import { Cart } from './pages/Cart';
-import { Homepage } from './pages/Homepage';
-import { Menu } from './pages/Menu';
-import { Store } from './pages/Store';
-import Navbar from './components/Navbar';
+import Cart from './pages/cart/Cart';
+import Homepage from './pages/homepage/Homepage';
+import Menu from './pages/menu/Menu';
+import Store from './pages/store/Store';
+import Navbar from './components/navbar/Navbar';
 
 function App() {
   return (
-    <div>
-      <div>
-        <Navbar/>
+    <div className="sections">
+      <div> 
+        <Navbar/>     
         <Routes>
           <Route
               path='/'
