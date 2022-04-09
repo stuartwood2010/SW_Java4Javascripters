@@ -73,8 +73,9 @@ const resolvers = {
 				payment_method_types: ['card'],
 				line_items,
 				mode: 'payment',
-				success_url: `https://www.google.com`,
-				cancel_url: `https://www.google.com`
+				// CREATE A FRONT END TO INTERACT WITH BELOW!!!!!!
+				// success_url: `${url}/success?session_id={CHECKOUT_SESSION_ID}`,
+				// cancel_url: `${url}/`
 			});
 			return {
 				session: session.id
