@@ -6,23 +6,17 @@ import { Login } from './pages/Login';
 import { Menu } from './pages/Menu';
 import { SignUp } from './pages/Signup';
 import { Store } from './pages/Store';
+import Navbar from './components/Navbar';
 
 function App() {
   return (
     <div>
       <div>
+        <Navbar/>
         <Routes>
           <Route
               path='/'
               element={<Homepage/>}
-            />
-            <Route
-              path='/signup'
-              element={<SignUp/>}
-            />
-            <Route
-              path='/login'
-              element={<Login/>}
             />
             <Route
               path='/store'
