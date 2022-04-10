@@ -1,10 +1,11 @@
 
 .card {
-  width: 25vw;
+  width: 30vw;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-evenly;
+  justify-content: center;
+  margin: auto;
 }
 .productCards {
   width: 100%;
@@ -14,17 +15,14 @@
 .cardTitle {
   font-size: 24px;
   text-align: center;
-  background-color: rgb(116, 116, 116);
+  background-color: rgb(63, 59, 59);
+  color: white;
 }  
 .cardContent {
   padding: 10;
   display: flex;
   flex-direction: column;
   text-align: center;
-  
-}
-.addToCartBtn {
-  background-color: rgb(160, 70, 37);
   
 }
 .cartBtns {
@@ -34,4 +32,14 @@
 .cartQuantity {
   display: flex;
   width: 25px;
+}
+.addToCartBtn {
+  background-color: rgb(160, 70, 37);
+  border-color: rgb(160, 70, 37);
+  color: white;
+}
+.addToCartBtn:hover {
+  background-color:rgb(63, 59, 59);
+  color:rgb(160, 70, 37);
+  border-color: rgb(160, 70, 37)
 }
