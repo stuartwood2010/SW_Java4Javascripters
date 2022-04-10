@@ -5,10 +5,11 @@ import Homepage from './pages/homepage/Homepage';
 import Menu from './pages/menu/Menu';
 import Store from './pages/store/Store';
 import Navbar from './components/navbar/Navbar';
+import './app.scss';
 
 function App() {
   return (
-    <div className="sections">
+    <div className="app">
       <div> 
         <Navbar/>     
         <Routes>
