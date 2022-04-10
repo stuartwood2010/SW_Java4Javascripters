@@ -1,4 +1,11 @@
-
+.page {
+  width: 100vw;
+}
+.container {
+  display: flex;
+  width: 100vw;
+  margin: 0 auto;
+}
 .card {
   width: 30vw;
   display: flex;
@@ -7,44 +14,6 @@
   justify-content: center;
   margin: 20px auto;
 }
-.productCards {
-  width: 100%;
-  margin: 20;
-  background-color: rgb(207, 207, 207);
-}
-.cardTitle {
-  font-size: 24px;
+h2 {
   text-align: center;
-  background-color: rgb(63, 59, 59);
-  color: white;
-}  
-.cardContent {
-  padding: 10;
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  
-}
-.cartBtns {
-  display: flex;
-  justify-content: center;
-}
-.cartQuantity {
-  display: flex;
-  width: 25px;
-}
-.addToCartBtn {
-  background-color: rgb(160, 70, 37);
-  border-color: rgb(160, 70, 37);
-  color: white;
-}
-.addToCartBtn:hover {
-  background-color:rgb(63, 59, 59);
-  color:rgb(160, 70, 37);
-  border-color: rgb(160, 70, 37)
-}
-.addToCartBtn:focus {
-  background-color: rgb(160, 70, 37);
-  border-color: rgb(160, 70, 37);
-  color: white;
 }

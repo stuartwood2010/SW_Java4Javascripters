@@ -1,41 +1,62 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
+import ProductItem from '../productItem/ProductItem';
+import { useStoreContext } from '../../utils/GlobalState';
+import { UPDATE_PRODUCTS } from '../../utils/actions';
 import { useQuery } from '@apollo/client';
-import {PRODUCTS} from '../../utils/queries'
+import { PRODUCTS } from '../../utils/queries';
+import { idbPromise } from '../../utils/helpers';
 import './card.scss';
-// In `Card`, we can assign a style from an object by using curly braces
-// We are assigning the card, heading, and content all from our `style` object
-const ProductCards = () => {
-  
-  const [count, setCount] = useState(1);
-  const {loading, data} = useQuery(PRODUCTS);
+function ProductCards() {
+  const [state, dispatch] = useStoreContext();
+
+  const { loading, data } = useQuery(PRODUCTS);
+
+  useEffect(() => {
+    if (data) {
+      dispatch({
+        type: UPDATE_PRODUCTS,
+        products: data.products,
+      });
+      data.products.forEach((product) => {
+        idbPromise('products', 'put', product);
+      });
+    } else if (!loading) {
+      idbPromise('products', 'get').then((products) => {
+        dispatch({
+          type: UPDATE_PRODUCTS,
+          products: products,
+        });
+      });
+    }
+  }, [data, loading, dispatch]);
+
   const myProducts = data?.products;
-  if (loading) {
-    return <h2>LOADING...</h2>;
-  }
   return (
-      myProducts.map((product) => {
-        return (
-          <div className="card" key={product._id}>
-            <div className="productCards">
-              <h2 className="cardTitle">{product.name}</h2>
-              <div className="cardContent">
-                <div className="card-body">
-                  <p className="card-title">{product.description}</p>
-                  <p className="card-title"> $ {product.price}</p>
-                </div>
-                <div className="cartBtns">
-                  <button className="decrementBtn" onClick={() => setCount(count - 1)}>-</button>
-                  <input className="cartQuantity" value={count} onChange={(event) => setCount(event.target.value)}></input>
-                  <button className="incrementBtn" onClick={() => setCount(count + 1)}>+</button>
-                </div>
-                <button className="btn btn-primary addToCartBtn">Add To Cart</button>
-              </div>
-            </div>
+    <div className="page"> 
+      <h2>J4J Store:</h2>
+      <div className="my-2 container">
+        {state.products.length ? (
+        <div className="card">
+          <div>
+            {myProducts.map((product) => (
+              <ProductItem
+                key={product._id}
+                _id={product._id}
+                image={product.image}
+                name={product.name}
+                price={product.price}
+                description={product.description}
+              />
+            ))}
           </div>
-
-        )
-      })
-    );
+        </div>
+        ) : (
+          <h3>You haven't added any products yet!</h3>
+        )}
+        {loading ? "loading" : null}
+      </div>
+    </div>
+  );
 }
-export default ProductCards;
 
+export default ProductCards;
