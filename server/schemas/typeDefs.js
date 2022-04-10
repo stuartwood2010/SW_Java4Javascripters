@@ -13,6 +13,12 @@ const typeDefs = gql`
         orders: [Order]
     }
 
+    type Drink {
+        _id: ID
+        name: String
+        image: String
+    }
+
     type Product {
         _id: ID
         name: String
@@ -39,6 +45,7 @@ const typeDefs = gql`
     }
 
     type Query {
+        drinks: [Drink]
         products: [Product]
         product(id: ID!): Product
         user: User
