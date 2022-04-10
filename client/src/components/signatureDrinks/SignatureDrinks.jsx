@@ -7,8 +7,6 @@ import './signatureDrinks.scss'
 const SignatureDrinks = () => {
     const {loading, data} = useQuery(DRINKS);
     const favoriteDrinks = data?.drinks;
-    console.log(favoriteDrinks);
-
     if (loading) {
         return <h2>LOADING...</h2>;
     }
