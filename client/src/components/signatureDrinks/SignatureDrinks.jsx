@@ -16,7 +16,7 @@ const SignatureDrinks = () => {
                 {favoriteDrinks.map((drink) => {
                     return (
                     <Card key={drink._id} border='dark'>
-                        <Card.Img src={drink.image}/>
+                        {/* <Card.Img src={drink.image}/> */}
                         <Card.Body>
                             <Card.Title>{drink.name}</Card.Title>
                         </Card.Body>
