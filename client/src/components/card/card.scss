@@ -1,21 +1,37 @@
 
-
-  .productCards {
-    margin: 20;
-    background-color: green;
-  }
-  .card-title {
-    background: '#3f51b5';
-    min-height: 50;
-    line-height: 3.5;
-    font-size: '1.2rem';
-    color: 'white';
-    padding: '0 20px';
-  }
-
-
+.card {
+  width: 25vw;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+.productCards {
+  width: 100%;
+  margin: 20;
+  background-color: rgb(207, 207, 207);
+}
+.cardTitle {
+  font-size: 24px;
+  text-align: center;
+  background-color: rgb(116, 116, 116);
+}  
+.cardContent {
+  padding: 10;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
   
-  .productContent {
-    padding: 10;
+}
+.addToCartBtn {
+  background-color: rgb(160, 70, 37);
   
-  }
+}
+.cartBtns {
+  display: flex;
+  justify-content: center;
+}
+.cartQuantity {
+  display: flex;
+  width: 25px;
+}
