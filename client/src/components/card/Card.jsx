@@ -15,7 +15,7 @@ const ProductCards = () => {
   return (
       myProducts.map((product) => {
         return (
-          <div className="card">
+          <div className="card" key={product._id}>
             <div className="productCards">
               <h2 className="cardTitle">{product.name}</h2>
               <div className="cardContent">
@@ -25,7 +25,7 @@ const ProductCards = () => {
                 </div>
                 <div className="cartBtns">
                   <button className="decrementBtn" onClick={() => setCount(count - 1)}>-</button>
-                  <input className="cartQuantity" value={count}></input>
+                  <input className="cartQuantity" value={count} onChange={(event) => setCount(event.target.value)}></input>
                   <button className="incrementBtn" onClick={() => setCount(count + 1)}>+</button>
                 </div>
                 <button className="btn btn-primary addToCartBtn">Add To Cart</button>
