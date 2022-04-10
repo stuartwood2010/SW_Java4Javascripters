@@ -1,10 +1,13 @@
 const { AuthorizationError } = require('apollo-server-express');
-const { Order, Product, User } = require('../models');
+const { Drink, Order, Product, User } = require('../models');
 const utils = require('../utils');
 const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
 
 const resolvers = {
 	Query: {
+		drinks: async () => {
+			return await Drink.find()
+		},
 		user: async (_root, {
 			id
 		}) => {
