@@ -1,7 +1,6 @@
 import React from "react";
-import Jumbotron from '../../components/jumbotron/Jumbotron';
-import SignatureDrinks from "../../components/signatureDrinks/SignatureDrinks";
-import "./homepage.scss";
+import Jumbotron from '../components/jumbotron/Jumbotron';
+import SignatureDrinks from "../components/signatureDrinks/SignatureDrinks";
 
 function Homepage() {
     

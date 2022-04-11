@@ -5,7 +5,6 @@ import { UPDATE_PRODUCTS } from '../../utils/actions';
 import { useQuery } from '@apollo/client';
 import { PRODUCTS } from '../../utils/queries';
 import { idbPromise } from '../../utils/helpers';
-import './card.scss';
 function ProductCards() {
   const [state, dispatch] = useStoreContext();
 
@@ -37,7 +36,6 @@ function ProductCards() {
         {state.products.length ? (
         <div className="box-container">          
           {myProducts.map((product) => (
-          <div className="productCard">
             <ProductItem
               key={product._id}
               _id={product._id}
@@ -46,7 +44,6 @@ function ProductCards() {
               price={product.price}
               description={product.description}
             />
-          </div>
           ))}          
         </div>
         ) : (

@@ -1,8 +1,6 @@
 import React from "react";
-import { Card, Container } from 'react-bootstrap';
 import { useQuery } from '@apollo/client';
 import {DRINKS} from '../../utils/queries'
-import './signatureDrinks.scss'
 
 const SignatureDrinks = () => {
     const {loading, data} = useQuery(DRINKS);
@@ -11,19 +9,17 @@ const SignatureDrinks = () => {
         return <h2>LOADING...</h2>;
     }
     return (
-        <div>
-            <Container>
+        <div className="drinkContainer">
+            <div className="drinks">
                 {favoriteDrinks.map((drink) => {
                     return (
-                    <Card key={drink._id} border='dark'>
-                        {/* <Card.Img src={drink.image}/> */}
-                        <Card.Body>
-                            <Card.Title>{drink.name}</Card.Title>
-                        </Card.Body>
-                    </Card>
+                    <div key={drink._id} className="drinkCard">
+                        {/* <Card.Img src={drink.image}/>                        */}
+                        <p>{drink.name}</p>                    
+                    </div>
                     );
                 })}
-            </Container>
+            </div>            
         </div>
     )
 }

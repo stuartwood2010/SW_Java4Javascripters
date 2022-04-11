@@ -4,14 +4,13 @@ import { Navbar, Nav, Container, Modal, Tab } from 'react-bootstrap';
 import SignUpForm from '../signupForm/SignupForm';
 import LoginForm from '../loginForm/LoginForm';
 import Auth from '../../utils/auth';
-import './navbar.scss';
 
 const AppNavbar = () => {
   // set modal display state
   const [showModal, setShowModal] = useState(false);
   return (
     <>
-      <Navbar bg='dark' variant='dark' expand='lg'>
+      <Navbar className="navbar" variant='dark' expand='lg'>
         <Container fluid>
           <Navbar.Brand as={Link} to='/'>
             Java 4 JavaScripters
@@ -24,9 +23,6 @@ const AppNavbar = () => {
               </Nav.Link>
               {Auth.loggedIn() ? (
                 <>
-                  <Nav.Link as={Link} to='/cart'>
-                    Cart
-                  </Nav.Link>
                   <Nav.Link onClick={Auth.logout}>Logout</Nav.Link>
                 </>
               ) : (

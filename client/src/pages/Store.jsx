@@ -1,6 +1,5 @@
 import React from "react";
-import ProductCards from '../../components/card/Card';
-import "./store.scss";
+import ProductCards from '../components/card/Card';
 
 function Store() {
     return (

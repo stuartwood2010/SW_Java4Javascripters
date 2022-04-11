@@ -1,0 +1,183 @@
+:root {
+  --primaryColor: rgb(160, 70, 37);
+  --secondaryColor: rgb(48, 39, 29);
+  --white: rgb(255, 255, 255);
+  --backgroundColor: rgb(189, 172, 158);
+  --cardBG: rgb(105, 92, 80);
+}
+///////////////////////////////////////////////////////////
+// Navbar Styling
+.navbar {
+  background-color: var(--secondaryColor); 
+  height: 80px;
+}
+.navLink {
+  color: var(--white);
+}
+///////////////////////////////////////////////////////////
+// Homepage styling
+.homepage {
+  height: 100vh;
+  background-color: var(--backgroundColor);
+}
+.jumbotron {
+    height: 450px;  
+    position: relative;
+    background-image: url(../public/images/jumbotron.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.drinkContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  width: 100vw;
+}
+.drinks {
+  display: flex;
+  flex-direction: row;
+}
+.drinkCard {
+  border: var(--secondaryColor) solid;
+  background-color: var(--primaryColor);
+  display: flex;
+  color: var(--white);
+  font-size: 36px;
+  justify-content: center;
+  align-items: center;
+  width: 30vw;
+  height: 180px;
+  margin: 10px;
+  border-radius: 15px;
+  box-shadow: 5px 5px 5px 5px grey;
+}
+
+//////////////////////////////////////////////////////////
+// Store Page Styling
+.store-page {
+    display: inline-flex;
+    flex-wrap: wrap;
+    background-color: var(--backgroundColor)
+}
+.store {
+    width: 100vw;
+    height: 100vh;
+    box-sizing: border-box;
+  }
+  .container {
+    display: flex;
+    width: 100vw;
+    margin: 0 auto;
+    flex-wrap: wrap;
+  }
+  h2 {
+    text-align: center;
+  }
+  .box-container {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+  }
+  .card {
+    background-color: var(--cardBG);
+    text-align: center;
+    width: 30vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 10px;
+    border-radius: 15px;
+    box-shadow: 5px 5px 5px 5px grey;
+  }
+  .cardTitle {
+    font-size: 24px;
+    text-align: center;
+    background-color: var(--secondaryColor);
+    color: var(--white);
+    border-top-left-radius:15px;
+    border-top-right-radius:15px;
+  }  
+  .addToCartBtn {
+    background-color: var(--primaryColor);
+    border-color: var(--primaryColor);
+    color: var(--white);
+    border-bottom-left-radius:15px;
+    border-bottom-right-radius:15px;
+  }
+  .addToCartBtn:hover {
+    background-color:var(--secondaryColor);
+    color:var(--primaryColor);
+    border-color: var(--primaryColor);
+  }
+  .addToCartBtn:focus {
+    background-color: var(--primaryColor);
+    border-color: var(--primaryColor);
+    color: var(--white);
+  }
+  /////////////////////////////////////////////////////////////////////
+//   Cart module Styling
+  .cart {
+    color: var(--primaryColor);
+    position: fixed;
+    top: 0;
+    right: 0;
+    min-width: 20%;
+    max-width: 30%;
+    max-height: 60%;
+    background-color: var(--white);
+    overflow: auto;
+    padding: .5rem;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, .5);
+    border-bottom-left-radius: .5rem;
+  }
+  
+  .cart h2 {
+    font-size: 1.5rem;
+    border-bottom: 1px solid var(--secondaryColor);
+    padding-bottom: .5rem;
+    margin: 1rem 0;
+  }
+  
+  .cart .close {
+    position: absolute;
+    top: .5rem;
+    right: .5rem;
+    cursor: pointer;
+    color: var(--secondaryColor);
+  }
+  
+  .cart .close:hover {
+    text-decoration: underline;
+  }
+  
+  .cart-closed {
+    position: fixed;
+    top: 2%;
+    right: 1%;
+    font-size: 2rem;
+    cursor: pointer;
+    background-color: var(--white);
+    border-radius: 50%;
+    padding: .25rem;
+    width: 50px;
+    height: 50px;
+  }
+  
+  .cart-closed:hover {
+    transform: rotate(8deg);
+  }
+  
+  .cart img {
+    width: 70px;
+    margin-right: 1rem;
+  }
+  
+  .cart input {
+    width: 50px;
+    padding: 0;
+    margin: 0 .5rem 1rem 0;
+  }
+  /////////////////////////////////////////////////////

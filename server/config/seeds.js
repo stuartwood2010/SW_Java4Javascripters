@@ -1,7 +1,6 @@
 const db = require("./connection");
 const {
     Drink,
-    User,
     Product,
 } = require("../models");
 
@@ -13,15 +12,15 @@ db.once("open", async () => {
         [
             {
                 name: "Cold Brew",
-                image: "coldbrew.png"
+                image: "client/public/images/coldbrew.png"
             },
             {
                 name: "Latte Macchiato",
-                image: "latte.png"
+                image: "client/public/images/latte.png"
             },
             {
                 name: "Chai Tea",
-                image: "chaitea.png"
+                image: "client/public/images/chaitea.png"
             }
         ]
     )
@@ -67,9 +66,22 @@ db.once("open", async () => {
             quantity: 1000,
             inStock: true,
         },
-
-
-
+        {
+            name: "Coffee Mug",
+            description: "Store your coffee",
+            image: "client/public/logo192.png",
+            price: 1.99,
+            quantity: 1000,
+            inStock: true,
+        },
+        {
+            name: "Coffee Tumbler",
+            description: "Store your coffee",
+            image: "client/public/logo192.png",
+            price: 1.99,
+            quantity: 1000,
+            inStock: true,
+        },
     ]);
 
     console.log("products seeded");
