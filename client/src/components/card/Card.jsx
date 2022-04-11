@@ -32,29 +32,27 @@ function ProductCards() {
 
   const myProducts = data?.products;
   return (
-    <div className="page"> 
+    <div className="store"> 
       <h2>J4J Store:</h2>
-      <div className="my-2 container">
         {state.products.length ? (
-        <div className="card">
-          <div>
-            {myProducts.map((product) => (
-              <ProductItem
-                key={product._id}
-                _id={product._id}
-                image={product.image}
-                name={product.name}
-                price={product.price}
-                description={product.description}
-              />
-            ))}
+        <div className="box-container">          
+          {myProducts.map((product) => (
+          <div className="productCard">
+            <ProductItem
+              key={product._id}
+              _id={product._id}
+              image={product.image}
+              name={product.name}
+              price={product.price}
+              description={product.description}
+            />
           </div>
+          ))}          
         </div>
         ) : (
           <h3>You haven't added any products yet!</h3>
         )}
         {loading ? "loading" : null}
-      </div>
     </div>
   );
 }

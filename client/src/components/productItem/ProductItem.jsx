@@ -38,21 +38,17 @@ function ProductItem(item) {
   }
 
   return (
-          <div className="card" key={_id}>
-            <div className="productCards">
-            <img alt={name} src={`/images/${image}`}></img>
+          <card> className="card" key={_id}>            
+            <div className="cardContent">
               <h2 className="cardTitle">{name}</h2>
-              <div className="cardContent">
-                <div className="card-body">
-                  <p className="card-title">{description}</p>
-                  <p className="card-title"> $ {price}</p>
-                </div>
-                <div className="cartBtns">                  
-                </div>
-                <button onClick={addToCart} className="btn btn-primary addToCartBtn">Add To Cart</button>
+              <img alt={name} src={`/images/${image}`}></img>
+              <div className="card-body">
+                <p className="card-title">{description}</p>
+                <p className="card-title"> $ {price}</p>
               </div>
+              <button onClick={addToCart} className="btn btn-primary addToCartBtn">Add To Cart</button>
             </div>
-          </div>
+          </card>
   );
 }
 

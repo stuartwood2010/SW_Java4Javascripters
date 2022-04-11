@@ -1,11 +1,11 @@
 import React from "react";
-import "./store.scss";
 import ProductCards from '../../components/card/Card';
+import "./store.scss";
 
 function Store() {
     return (
-        <div className="store" id="store">
-            <ProductCards />
+        <div className="store-page" id="store-page">
+            <ProductCards/>
         </div>
     )
 }
