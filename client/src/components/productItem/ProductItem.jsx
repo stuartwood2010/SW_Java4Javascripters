@@ -2,7 +2,6 @@ import React from "react";
 import { useStoreContext } from "../../utils/GlobalState";
 import { ADD_TO_CART, UPDATE_CART_QUANTITY } from "../../utils/actions";
 import { idbPromise } from "../../utils/helpers";
-import './productItem.scss';
 function ProductItem(item) {
   const [state, dispatch] = useStoreContext();
 
@@ -38,8 +37,7 @@ function ProductItem(item) {
   }
 
   return (
-          <card> className="card" key={_id}>            
-            <div className="cardContent">
+          <card className="card" key={_id}>
               <h2 className="cardTitle">{name}</h2>
               <img alt={name} src={`/images/${image}`}></img>
               <div className="card-body">
@@ -47,7 +45,6 @@ function ProductItem(item) {
                 <p className="card-title"> $ {price}</p>
               </div>
               <button onClick={addToCart} className="btn btn-primary addToCartBtn">Add To Cart</button>
-            </div>
           </card>
   );
 }
