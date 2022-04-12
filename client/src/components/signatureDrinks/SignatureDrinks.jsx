@@ -9,19 +9,22 @@ const SignatureDrinks = () => {
         return <h2>LOADING...</h2>;
     }
     return (
-        <div className="drinksContainer">
-            {favoriteDrinks.map((drink) => {
-            return (
-                <div className="drinkContainer">
-                    <h2 className="drinkName">{drink.name}</h2>   
-                    <div key={drink._id} className="drinkCard">
-                        <div className="drink">
-                            <img src={drink.image} alt="{drink.name}" className="drinkPic"/>                  
+        <div>
+            <h1 className="favDrinks">Featured Drinks</h1>
+            <div className="drinksContainer">
+                {favoriteDrinks.map((drink) => {
+                return (
+                    <div className="drinkContainer">
+                        <h2 className="drinkName">{drink.name}</h2>   
+                        <div key={drink._id} className="drinkCard">
+                            <div className="drink">
+                                <img src={drink.image} alt="{drink.name}" className="drinkPic"/>                  
+                            </div>
                         </div>
                     </div>
-                </div>
-            );
-            })}
+                );
+                })}
+            </div>
         </div>
     )
 }
