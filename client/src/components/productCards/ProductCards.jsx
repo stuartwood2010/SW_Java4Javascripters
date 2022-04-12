@@ -32,7 +32,7 @@ function ProductCards() {
   const myProducts = data?.products;
   return (
     <div className="store"> 
-      <h2>J4J Store:</h2>
+      <h2 className="storeHeader" >J4J Store</h2>
         {state.products.length ? (
         <div className="box-container">          
           {myProducts.map((product) => (

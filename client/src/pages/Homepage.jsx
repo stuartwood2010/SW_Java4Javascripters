@@ -1,12 +1,10 @@
 import React from "react";
-import Jumbotron from '../components/jumbotron/Jumbotron';
 import SignatureDrinks from "../components/signatureDrinks/SignatureDrinks";
 
-function Homepage() {
-    
+function Homepage() {    
     return (
         <div className="homepage" id="homepage">
-            <Jumbotron/>        
+            <img src="https://i.ibb.co/mTtJXVD/jumbotron.png" alt="capuccino"className="jumbotronImg"></img>       
             <SignatureDrinks/>
         </div>
     )

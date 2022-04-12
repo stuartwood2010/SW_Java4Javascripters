@@ -12,8 +12,7 @@ function App() {
     <div className="sections">
       <StoreProvider>
         <div> 
-          <Navbar/> 
-           
+          <Navbar/>
           <Routes>
             <Route
                 path='/'
@@ -23,7 +22,7 @@ function App() {
                 path='/store'
                 element={<Store/>}
               />
-          </Routes>
+          </Routes>                    
           <Cart/> 
         </div>
       </StoreProvider>    
