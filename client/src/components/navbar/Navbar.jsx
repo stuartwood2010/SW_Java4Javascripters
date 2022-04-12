@@ -11,7 +11,9 @@ const AppNavbar = () => {
   return (
     <>
       <Navbar className="navbar" variant='dark' expand='lg'>
-        <img src="https://i.ibb.co/3BCx51T/logo.png" alt="J4J Logo" className="logo"></img>
+        <a href="/">
+          <img src="https://i.ibb.co/3BCx51T/logo.png" alt="J4J Logo" className="logo"></img>
+        </a>
         <Container fluid>
           <Navbar.Brand as={Link} to='/'>
             <h1 className="navTitle">Java 4 Javascripters</h1>
