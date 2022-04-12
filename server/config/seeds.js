@@ -12,15 +12,15 @@ db.once("open", async () => {
         [
             {
                 name: "Cold Brew",
-                image: "client/public/images/coldbrew.png"
+                image: "https://i.ibb.co/hBCBH8X/coldbrew.png"
             },
             {
                 name: "Latte Macchiato",
-                image: "client/public/images/latte.png"
+                image: "https://i.ibb.co/t8R1Bz7/latte.png"
             },
             {
                 name: "Chai Tea",
-                image: "client/public/images/chaitea.png"
+                image: "https://i.ibb.co/sKFN6b2/chaitea.png"
             }
         ]
     )
@@ -28,57 +28,48 @@ db.once("open", async () => {
     const products = await Product.insertMany([{
             name: "J4J Coffee - 1 lbs",
             description: "1 pound of coffee.",
-            price: 26.00,
-            image: "client/public/logo192.png",
+            price: 25.99,
+            image: "https://i.ibb.co/Ct919m6/coffeebag-ccexpress.png",
             quantity: 500,
             inStock: true,
         },
-        {
-            name: "Canned Coffee",
-            description: "Drinking coffee from a can sucks.",
-            image: "client/public/logo192.png",
-            price: 1.99,
-            quantity: 500,
-            inStock: true,
-        },
-
         {
             name: "French Press",
             description: "Press away.",
-            image: "client/public/logo192.png",
-            price: 14.99,
+            image: "https://i.ibb.co/QYRvznP/frenchpress-ccexpress.png",
+            price: 134.99,
             quantity: 100,
             inStock: true,
         },
         {
-            name: "J4J Sweatshirt",
-            description: "I'm a sweatshirt, I'm also a sweetshirt.",
-            image: "client/public/logo192.png",
-            price: 9.99,
+            name: "J4J T-shirt Black",
+            description: "J4J enthusiast T-Shirt in Black",
+            image: "https://i.ibb.co/G5VNYVM/black-Shirt.png",
+            price: 29.99,
+            quantity: 100,
+            inStock: true,
+        },
+        {
+            name: "J4J T-shirt White",
+            description: "J4J enthusiast T-Shirt in White",
+            image: "https://i.ibb.co/KGPtZV6/white-Shirt.png",
+            price: 29.99,
             quantity: 100,
             inStock: true,
         },
         {
             name: "Coffee Cannister",
             description: "Store your coffee",
-            image: "client/public/logo192.png",
-            price: 1.99,
+            image: "https://i.ibb.co/HgG72HL/coffeecannister-ccexpress.png",
+            price: 15.99,
             quantity: 1000,
             inStock: true,
         },
         {
             name: "Coffee Mug",
             description: "Store your coffee",
-            image: "client/public/logo192.png",
-            price: 1.99,
-            quantity: 1000,
-            inStock: true,
-        },
-        {
-            name: "Coffee Tumbler",
-            description: "Store your coffee",
-            image: "client/public/logo192.png",
-            price: 1.99,
+            image: "https://i.ibb.co/r783XzK/project-3-mug-ccexpress.png",
+            price: 10.99,
             quantity: 1000,
             inStock: true,
         },

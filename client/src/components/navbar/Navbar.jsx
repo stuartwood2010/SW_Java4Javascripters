@@ -11,22 +11,24 @@ const AppNavbar = () => {
   return (
     <>
       <Navbar className="navbar" variant='dark' expand='lg'>
+        <img src="https://i.ibb.co/3BCx51T/logo.png" alt="J4J Logo" className="logo"></img>
         <Container fluid>
           <Navbar.Brand as={Link} to='/'>
-            Java 4 JavaScripters
+            <h1 className="navTitle">Java 4 Javascripters</h1>
           </Navbar.Brand>
-          <Navbar.Toggle aria-controls='navbar' />
-          <Navbar.Collapse id='navbar'>
-            <Nav className='ml-auto'>
-              <Nav.Link as={Link} to='/store'>
+          <Navbar.Toggle aria-controls='navbar'/>
+          
+          <Navbar.Collapse id='navbar' className="navItems">
+            <Nav className="ml-auto">
+              <Nav.Link as={Link} to='/store' className="navLink">
                 Store
               </Nav.Link>
               {Auth.loggedIn() ? (
                 <>
-                  <Nav.Link onClick={Auth.logout}>Logout</Nav.Link>
+                  <Nav.Link onClick={Auth.logout} className="navLink">Logout</Nav.Link>
                 </>
               ) : (
-                <Nav.Link onClick={() => setShowModal(true)}>Login/Sign Up</Nav.Link>
+                <Nav.Link onClick={() => setShowModal(true)} className="navLink">Login/Sign Up</Nav.Link>
               )}
             </Nav>
           </Navbar.Collapse>

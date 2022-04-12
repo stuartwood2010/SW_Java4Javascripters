@@ -39,7 +39,7 @@ function ProductItem(item) {
   return (
           <card className="card" key={_id}>
               <h2 className="cardTitle">{name}</h2>
-              <img alt={name} src={`/images/${image}`}></img>
+              <img alt={name} src={image} className="productImg"></img>
               <div className="card-body">
                 <p className="card-title">{description}</p>
                 <p className="card-title"> $ {price}</p>
