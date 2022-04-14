@@ -20,7 +20,7 @@ const resolvers = {
 			if (context.user) {
 				const user = await User.findById(context.user.firstName._id)
 
-				// user.orders.sort((a, b) => b.purchaseDate - a.purchaseDate);
+				user.orders.sort((a, b) => b.purchaseDate - a.purchaseDate);
 
 				return user;
 			}

@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import Homepage from './pages/Homepage';
 import Store from './pages/Store';
 import Success from './pages/Success';
-import OrderHistory from './pages/OrderHistory';
+// import OrderHistory from './pages/OrderHistory';
 import Detail from './pages/Detail';
 import Navbar from './components/navbar/Navbar';
 import { StoreProvider } from './utils/GlobalState';
@@ -29,10 +29,10 @@ function App() {
                 path="/success" 
                 element={<Success />} 
               />
-              <Route 
+              {/* <Route 
                 path="/orderHistory" 
                 element={<OrderHistory />} 
-              />
+              /> */}
               <Route 
                 path="/products/:id" 
                 element={<Detail />} 
