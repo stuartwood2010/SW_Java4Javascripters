@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 const { authMiddleware } = require('./utils');
 const {resolvers, typeDefs,} = require('./schemas');
 const db = require('./config/connection');
+const path = require('path');
 
 
 const server = new ApolloServer({
