@@ -14,9 +14,9 @@ const SignatureDrinks = () => {
             <div className="drinksContainer">
                 {favoriteDrinks.map((drink) => {
                 return (
-                    <div className="drinkContainer">
+                    <div className="drinkContainer" key={drink._id}>
                         <h2 className="drinkName">{drink.name}</h2>   
-                        <div key={drink._id} className="drinkCard">
+                        <div className="drinkCard">
                             <div className="drink">
                                 <img src={drink.image} alt="{drink.name}" className="drinkPic"/>                  
                             </div>
