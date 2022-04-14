@@ -182,6 +182,12 @@
   border-color: var(--primaryColor);
   color: var(--white);
 }
+/////////////////////////////////////////////////////////////////////
+// Order History Stylings
+
+.backToProducts {
+  margin-top: 80px;
+}
 
 /////////////////////////////////////////////////////////////////////
 //   Cart module Styling
@@ -251,8 +257,41 @@
 }
 
 /////////////////////////////////////////////////////
+// Sussess styling
+.successContainer {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--backgroundColor)
+}
+.successMessage {  
+  margin-top: 100px;
+  text-align: center;
+}
+.successH2 {
+  text-align: center;
+}
+/////////////////////////////////////////////////////
 // Login/Signup Module Styling
- 
+.nav-pills .nav-link.active {
+  background-color: var(--primaryColor);
+}
+.nav-link {
+  color: var(--secondaryColor);
+}
+.nav-link:hover {
+  color: var(--primaryColor);
+}
+.btn:disabled, .btn-success {
+  background-color: var(--primaryColor);
+  margin-top: 20px;
+  margin-left: 38%;
+  width: 120px;
+  padding: 10px;
+  border: none;
+  }
+.modal-content {
+  background-color: var(--backgroundColor);
+}
 /////////////////////////////////////////////////////
 // Media Query
 @media (max-width: 991px) {
@@ -261,5 +300,10 @@
   }
   .cart-closed {
     left: 10px;
+  }
+  .jumbotronImg {
+    height: 450px;
+    width: 100vw;
+    position: relative;
   }
 }

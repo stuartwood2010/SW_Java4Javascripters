@@ -1,5 +1,13 @@
-const { AuthorizationError } = require('apollo-server-express');
-const { Drink, Order, Product, User } = require('../models');
+const {
+	AuthorizationError,
+	AuthenticationError
+} = require('apollo-server-express');
+const {
+	Drink,
+	Order,
+	Product,
+	User
+} = require('../models');
 const utils = require('../utils');
 const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
 
@@ -8,15 +16,19 @@ const resolvers = {
 		drinks: async () => {
 			return await Drink.find()
 		},
-		user: async (_root, {
-			id
-		}) => {
-			return await User.findById(id);
+		user: async (parent, args, context) => {
+			if (context.user) {
+				const user = await User.findById(context.user.firstName._id)
+
+				// user.orders.sort((a, b) => b.purchaseDate - a.purchaseDate);
+
+				return user;
+			}
 		},
 		users: async (_root, _args, context) => {
-			// if (!context.req.user) {
-			// 	throw new AuthorizationError('You must be logged in to do that');
-			// }
+			if (!context.req.user) {
+				throw new AuthorizationError('You must be logged in to do that');
+			}
 			return await User.find({});
 		},
 		product: async (_root, {
@@ -27,43 +39,35 @@ const resolvers = {
 		products: async () => {
 			return await Product.find({});
 		},
+		orders: async () => {
+			return await Order.find({});
+		},
 		order: async (parent, {
 			_id
 		}, context) => {
-			if (context.user) {
-				const user = await User.findById(context.user._id).populate({
-					path: 'orders.products',
-				});
-				return user.orders.id(_id);
-			}
-			throw new AuthorizationError('Not logged in');
+			console.log(_id)
+			const order = await Order.findById(_id)
+			return order;
 		},
-		checkout: async (parent, args, context) => {
-			// const url = new URL(context.headers.referer).origin;
+		checkout: async (parent,  args , context) => {
+			const url = new URL(context.headers.referer).origin;
 			const order = await Order.create({
 				products: args.products
-			});
-			await User.findByIdAndUpdate(
-				{ _id: context.user._id },
-				{ $push: { orders: order} },
-				{ new: true }
-			  );
+			});			
 			const line_items = [];
-
-			const {
-				products
-			} = await order.populate('products');
-
+			const { products } = await order.populate('products');
 			for (let i = 0; i < products.length; i++) {
+				console.log('forloop hit');
 				const product = await stripe.products.create({
 					name: products[i].name,
 					description: products[i].description,
-					// images: [`${url}/images/${products[i].image}`]
+					// Image not rendering
+					// images:	[`${url}/images/${products[i].image}`]
 				});
-
+				console.log(product)
 				const price = await stripe.prices.create({
 					product: product.id,
-					unit_amount: products[i].price * 100,
+					unit_amount: order.products[i].price * 100,
 					currency: 'usd',
 				});
 
@@ -72,14 +76,17 @@ const resolvers = {
 					quantity: 1
 				});
 			}
+			console.log('init sessions');
 			const session = await stripe.checkout.sessions.create({
 				payment_method_types: ['card'],
 				line_items,
 				mode: 'payment',
 				// CREATE A FRONT END TO INTERACT WITH BELOW!!!!!!
-				// success_url: `${url}/success?session_id={CHECKOUT_SESSION_ID}`,
-				// cancel_url: `${url}/`
+				success_url: `${url}/success?session_id={CHECKOUT_SESSION_ID}`,
+				cancel_url: `${url}/`
 			});
+			console.log('session complete');
+			// console.log(session);
 			return {
 				session: session.id
 			};
@@ -116,50 +123,72 @@ const resolvers = {
 			});
 
 			if (!user) {
-				throw new AuthorizationError('No user found with these credentials');
+				throw new AuthenticationError('No user found with these credentials');
 			}
 
-			// successfully logged in
-			if (user.password === password) {
-				const token = utils.signToken(user.username, user._id);
-				return {
-					token,
-					user
-				};
+			const correctPw = await user.isCorrectPassword(password);
+
+			if (!correctPw) {
+				throw new AuthenticationError('No user found with these credentials');
 			}
 
-			throw new AuthorizationError('No user found with these credentials');
+			const token = utils.signToken(user);
+
+			return {
+				token,
+				user
+			};
+
 
 		},
-	  updateUser: async (parent, args, context) => {
-      if (context.user) {
-        return await User.findByIdAndUpdate(context.user._id, args, { new: true });
-      }
+		updateUser: async (parent, args, context) => {
+			if (context.user) {
+				return await User.findByIdAndUpdate(context.user._id, args, {
+					new: true
+				});
+			}
 
-      throw new AuthenticationError('Not logged in');
-    },
-		addOrder: async (parent, { products }, context) => {
-
-      if (context.user) {
+			throw new AuthenticationError('Not logged in');
+		},
+		addOrder: async (parent, {products}, context) => {
+			console.log(products);
+			if (context.user) {
 				try {
-					let order = await Order.create({ products });
+					let order = await Order.create({
+						products
+					});
 					order = await order.populate("products");
 					console.log(order);
-					await User.findByIdAndUpdate(context.user._id, { $push: { orders: order }}, { new: true });
-				return order;
+					await User.findByIdAndUpdate(context.user._id, {
+						$push: {
+							orders: order
+						}
+					}, {
+						new: true
+					});
+					return order;
 				} catch (e) {
 					throw new Error(e.message);
 				}
-        
-      }
 
-      throw new AuthenticationError('Not logged in');
-    },
-		updateProduct: async (parent, { _id, quantity }) => {
-      const decrement = Math.abs(quantity) * -1;
+			}
 
-      return await Product.findByIdAndUpdate(_id, { $inc: { quantity: decrement } }, { new: true });
-    },
+			throw new AuthenticationError('Not logged in');
+		},
+		updateProduct: async (parent, {
+			_id,
+			quantity
+		}) => {
+			const decrement = Math.abs(quantity) * -1;
+
+			return await Product.findByIdAndUpdate(_id, {
+				$inc: {
+					quantity: decrement
+				}
+			}, {
+				new: true
+			});
+		},
 	},
 
 	User: {
